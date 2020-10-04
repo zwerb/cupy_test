@@ -1,0 +1,6 @@
+venv/
+
+*.py.swp
+*.main
+*.save.*
+*.py.save
