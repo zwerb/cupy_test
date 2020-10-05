@@ -26,9 +26,6 @@ def run_gpu(x_gpu, multiplier):
     e = time.time()
     print("GPU: {}".format(e - s))
 
-print("Repeating for multiplier: [{}]".format(str(iterations)))
-print("\nMatrix: {} * {}".format("x5 ^2",str(multiplier)))
-
 for y in range(1,6):
     run_gpu(x_gpu, multiplier)
     print("Completed cycle: [{}]".format(y))
