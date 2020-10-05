@@ -60,7 +60,7 @@ iterations = 120
 
 
 ### CuPy and GPU
-def run_gpu(iterations):
+def run_gpu(x_gpu, iterations):
     s = time.time()
     for x in range(1,iterations):
         x_gpu *= 5
@@ -78,5 +78,5 @@ print("Repeating for iterations: [{}]".format(str(repeats)))
 print("\nMatrix: {} * {}".format("x5 ^2",str(iterations)))
 
 for y in range(1,6):
-    run_gpu(iterations)
+    run_gpu(x_gpu, iterations)
     print("Completed cycle: [{}]".format(y))
