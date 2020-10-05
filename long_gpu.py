@@ -4,79 +4,31 @@ import time
 import os
 import math
 
-print("Matrix: {}".format("1000x1000x1000"))
 
-### Numpy and CPU
-s = time.time()
-x_cpu = np.ones((1000,1000,1000))
-e = time.time()
-print("CPU: {}".format(e - s))
-
-### CuPy and GPU
-s = time.time()
 x_gpu = cp.ones((1000,1000,1000))
-cp.cuda.Stream.null.synchronize()
-e = time.time()
-print("GPU: {}".format(e - s))
+iterations = 6
+multiplier = 120
 
-
-print("\nMatrix: {}".format("x5"))
-
-### Numpy and CPU
-s = time.time()
-x_cpu *= 5
-e = time.time()
-print("CPU: {}".format(e - s))
+print("Matrix: {}".format("cp.ones((1000,1000,1000))"))
+print("\nMatrix Multiplication: [{}]*[{}] run [{}] iterations.".format("*5 ^2 ^2",str(multiplier),str(iterations)))
 
 ### CuPy and GPU
-s = time.time()
-x_gpu *= 5
-cp.cuda.Stream.null.synchronize()
-e = time.time()
-print("GPU {}".format(e - s))
-
-print("\nMatrix: {}".format("x5 ^2"))
-
-### Numpy and CPU
-s = time.time()
-x_cpu *= 5
-x_cpu *= x_cpu
-x_cpu += x_cpu
-e = time.time()
-print("CPU: {}".format(e - s))
-
-
-### CuPy and GPU
-s = time.time()
-x_gpu *= 5
-x_gpu *= x_gpu
-x_gpu += x_gpu
-cp.cuda.Stream.null.synchronize()
-e = time.time()
-print("GPU {}".format(e - s))
-
-repeats = 6
-iterations = 120
-
-
-### CuPy and GPU
-def run_gpu(x_gpu, iterations):
+def run_gpu(x_gpu, multiplier):
     s = time.time()
-    for x in range(1,iterations):
+    for x in range(1,multiplier):
         x_gpu *= 5
         x_gpu *= x_gpu
         x_gpu += x_gpu
-        if x % math.ceil((iterations/2)+0.1) == 0:
+        if x % math.ceil((multiplier/2)+0.1) == 0:
             os.system('nvidia-smi')
             print("Still running...")
     cp.cuda.Stream.null.synchronize()
     e = time.time()
     print("GPU: {}".format(e - s))
 
-
-print("Repeating for iterations: [{}]".format(str(repeats)))
-print("\nMatrix: {} * {}".format("x5 ^2",str(iterations)))
+print("Repeating for multiplier: [{}]".format(str(iterations)))
+print("\nMatrix: {} * {}".format("x5 ^2",str(multiplier)))
 
 for y in range(1,6):
-    run_gpu(x_gpu, iterations)
+    run_gpu(x_gpu, multiplier)
     print("Completed cycle: [{}]".format(y))
