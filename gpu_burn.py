@@ -6,8 +6,8 @@ import math
 
 
 x_gpu = cp.ones((1000,1000,1000))
-iterations = 6
-multiplier = 120
+iterations = 5
+multiplier = 200
 
 print("Matrix: {}".format("cp.ones((1000,1000,1000))"))
 print("\nMatrix Multiplication: [{}]*[{}] run [{}] iterations.".format("*5 ^2 ^2",str(multiplier),str(iterations)))
