@@ -10,7 +10,7 @@ iterations = 5
 multiplier = 200
 
 print("Matrix: {}".format("cp.ones((1000,1000,1000))"))
-print("\nMatrix Multiplication: [{}]*[{}] run [{}] iterations.".format("*5 ^2 ^2",str(multiplier),str(iterations)))
+print("Matrix Multiplication: [{}]*[{}] run [{}] iterations.\n".format("*5 ^2 ^2",str(multiplier),str(iterations)))
 
 ### CuPy and GPU
 def run_gpu(x_gpu, multiplier):
